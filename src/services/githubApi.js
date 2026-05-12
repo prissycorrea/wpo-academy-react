@@ -11,3 +11,13 @@ export async function getUserProfile(username) {
 
     return response.json()
 }
+
+export async function getUserRepos(username) {
+    const response = await fetch('https://api.github.com/users/' + username + '/repos')
+
+    if(!response.ok) {
+        throw new Error('Não foi possível buscar os repositórios do usuário.')
+    }
+
+    return response.json()
+}

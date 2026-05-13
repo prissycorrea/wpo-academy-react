@@ -31,10 +31,10 @@ function handleViewDetails(username) {
 }
 
     return (
-        <main>
+        <main className="page page-home">
             <PageTitle text="Buscador de perfis do Github" />
             <SearchForm onSearch={handleSearch} isLoading={isLoading} />
-            {errorMessage && <p>{errorMessage}</p>}
+            {errorMessage && <p className="message">{errorMessage}</p>}
             <ProfileCard profile={profile} onViewDetails={handleViewDetails} />
         </main>
     )

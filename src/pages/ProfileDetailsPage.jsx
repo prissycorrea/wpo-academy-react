@@ -2,6 +2,7 @@ import PageTitle from "../components/PageTitle"
 import { useState, useEffect } from "react"
 import { getUserProfile, getUserRepos} from "../services/githubApi"
 import { useNavigate, useParams } from "react-router-dom"
+import Button from "../components/Button";
 
 function ProfileDetailsPage() {
     const { username } = useParams();
@@ -25,7 +26,7 @@ function ProfileDetailsPage() {
                 setProfile(profileData)
                 setRepos(reposData)
             } catch (error) {
-                setErrorMessage(error);
+                setErrorMessage(error.message);
             } finally {
                 setIsLoading(false)
             }
@@ -34,23 +35,38 @@ function ProfileDetailsPage() {
     }, [username])
 
     return (
-        <main>
+        <main className="page page-profile-details">
+        <Button onClick={() => navigate(-1)} className="button--ghost">Voltar</Button>
+        {isLoading && <p>Carregando...</p>}
+        {errorMessage && <p className="message">Erro: {errorMessage}</p>}
+        {profile && (
+            <section className="profile-details">
             <PageTitle text={`Detalhes de ${profile.login}`} />
-            <img src={profile.avatar_url} alt={'Avatar de '+ profile.login} />
-            <p><strong>Nome: </strong> {profile.name || 'Não informado'}</p>
-            <p><strong>Bio: </strong> {profile.bio || 'Não informado'}</p>
-            <p><strong>Seguidores: </strong> {profile.followers}</p>
-            <p><strong>Seguindo: </strong> {profile.following}</p>
-            <h2>Repositórios</h2>
+            <div className="profile-details__header">
+                <img className="profile-details__avatar" src={profile.avatar_url} alt={'Avatar de '+ profile.login} />
+                <div>
+                    <p><strong>Nome: </strong> {profile.name || 'Não informado'}</p>
+                    <p><strong>Bio: </strong> {profile.bio || 'Não informado'}</p>
+                    <div className="profile-details__stats">
+                        <p className="profile-details__stat"><strong>Seguidores:</strong> {profile.followers}</p>
+                        <p className="profile-details__stat"><strong>Seguindo:</strong> {profile.following}</p>
+                    </div>
+                </div>
+            </div>
+            <div className="repo-section">
+            <h2 className="repo-section__title">Repositórios</h2>
             {repos.length === 0 ? (<p>Este usuário não tem repositórios públicos</p> ) : (
-                <ul>
+                <ul className="repo-list">
                     {repos.map((repo) => (
-                        <li key={repo.id}>
-                            <a href={repo.html_url} target="self">{repo.name}</a>
+                        <li className="repo-list__item" key={repo.id}>
+                            <a className="repo-list__link" href={repo.html_url} target="_blank" rel="noreferrer">{repo.name}</a>
                         </li>
                     ))}
                 </ul>
             )}
+            </div>
+            </section>
+        )}
         </main>
     )
 }

@@ -1,0 +1,46 @@
+:root {
+	--bg-main: #f2f5fa;
+	--bg-surface: #ffffff;
+	--bg-elevated: #f8fafc;
+	--text-main: #1f2937;
+	--text-muted: #5b6474;
+	--brand: #0f6cbd;
+	--brand-hover: #115ea3;
+	--border: #d7deea;
+	--danger: #c62828;
+	--radius-sm: 10px;
+	--radius-md: 16px;
+	--radius-lg: 24px;
+	--shadow-soft: 0 10px 35px rgba(14, 26, 45, 0.08);
+	--container-max: 960px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: "Segoe UI", "Tahoma", sans-serif;
+	color: var(--text-main);
+	background:
+		radial-gradient(circle at 15% 20%, #eaf4ff 0%, transparent 35%),
+		radial-gradient(circle at 85% 10%, #fff1e8 0%, transparent 30%),
+		var(--bg-main);
+	line-height: 1.5;
+}
+
+a {
+	color: var(--brand);
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}

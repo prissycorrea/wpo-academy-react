@@ -1,6 +1,6 @@
 function PageTitle({ text }) {
     return (
-        <h1>{text}</h1>
+        <h1 className="page-title">{text}</h1>
     )
 }
 

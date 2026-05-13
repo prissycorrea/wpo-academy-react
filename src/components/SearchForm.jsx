@@ -15,10 +15,21 @@ function SearchForm({isLoading, onSearch}) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-        <label htmlFor="search">Pesquisar usuário do Github</label>
-            <Input id="search" type="text" placeholder="Digite o nome do usuário" value={searchTerm} onChange={ handleInputChange } disabled={isLoading} />
-            <Button id="search-button" disabled={isLoading}>{isLoading ? "Buscando..." : "Buscar"}</Button>
+        <form onSubmit={handleSubmit} className="search-form">
+            <label htmlFor="search" className="search-form__label">Pesquisar usuário do Github</label>
+            <div className="search-form__row">
+                <Input
+                    id="search"
+                    type="text"
+                    placeholder="Digite o nome do usuário"
+                    value={searchTerm}
+                    onChange={handleInputChange}
+                    disabled={isLoading}
+                />
+                <Button id="search-button" type="submit" disabled={isLoading}>
+                    {isLoading ? "Buscando..." : "Buscar"}
+                </Button>
+            </div>
         </form>
     )
 }
